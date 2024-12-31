@@ -11,7 +11,9 @@ pipeline {
         stage('Setup') {
             steps {
                 sh """
-                pip3 install --user -r requirements.txt
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r requirements.txt
                 """
             }
         }
@@ -19,6 +21,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
+                . venv/bin/activate
                 pytest
                 """
             }
